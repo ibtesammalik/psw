@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "6b7d7549-a538-445d-b3ed-f9790600fe67",
+		"name": "PSW Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Token Creation",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"client_id\": \"psw.mib.spa\",\r\n    \"client_secret\": \"1R27XY78Y34\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/mcib/auth/connect/token",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"mcib",
+						"auth",
+						"connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "introsecption",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mibpassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mibusername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwc3cubWliLnNwYSIsImF1ZCI6ImFkaSIsIm5iZiI6MTYxODM5NDA1MywiaXNzIjoiTUNCSXNsYW1pY0JhbmtJc3N1ZXIiLCJleHAiOjE2MTgzOTc2NTMsImlhdCI6MTYxODM5NDA1Mywicm9sIjoiQWRtaW5pc3RyYXRvciwgRGV2ZWxvcGVyIiwianRpIjoiMjcwMzAwNzM3MzBENDI1Mzg1OTRFNUYyREE5RkQyOUMifQ.Ij0U8S5QfVJV-huHq57-QBxOrbgGAU2krmEyVFexFHJ4CGmKiLqfoxtWu3EXtOo26Fwm6Qa1drEq9YI15fXatQ",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:8443/mcib/auth/connect/introspect",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"mcib",
+						"auth",
+						"connect",
+						"introspect"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M1 Iban Verification",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwc3cubWliLnNwYSIsImF1ZCI6ImFkaSIsIm5iZiI6MTYxODM5NDA1MywiaXNzIjoiTUNCSXNsYW1pY0JhbmtJc3N1ZXIiLCJleHAiOjE2MTgzOTc2NTMsImlhdCI6MTYxODM5NDA1Mywicm9sIjoiQWRtaW5pc3RyYXRvciwgRGV2ZWxvcGVyIiwianRpIjoiMjcwMzAwNzM3MzBENDI1Mzg1OTRFNUYyREE5RkQyOUMifQ.Ij0U8S5QfVJV-huHq57-QBxOrbgGAU2krmEyVFexFHJ4CGmKiLqfoxtWu3EXtOo26Fwm6Qa1drEq9YI15fXatQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"messageId\": \"a1374655-5eb8-4a0e-9eb5-989521cd1ca8\",\r\n\t\"timestamp\": \"20200925183412\",\r\n\t\"senderId\": \"PSW\",\r\n\t\"receiverId\": \"MIB\",\r\n\t\"processingCode\": \"301\",\r\n\t\"operationCode\": \"01\",\r\n\t\"data\": {\r\n\t\t\"iban\": \"PK67MCIB0471000001380003\",\r\n\t\t\"email\": \"abdulmonem327@gmail.com\",\r\n\t\t\"mobileNumber\": \"03314949327\",\r\n\t\t\"ntn\": \"40194078\"\r\n\t},\r\n\t\"signature\": \"baKJWqAJXgq30hd42zgjZzYx36DaHt49kbORRBNtJvQ=\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/dealers/mcib/edi",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"dealers",
+						"mcib",
+						"edi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M2 Shared Account detail AgainstIBAN",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwc3cubWliLnNwYSIsImF1ZCI6ImFkaSIsIm5iZiI6MTYxODM4MTk2MCwiaXNzIjoiTUNCSXNsYW1pY0JhbmtJc3N1ZXIiLCJleHAiOjE2MTgzODU1NjAsImlhdCI6MTYxODM4MTk2MCwicm9sIjoiQWRtaW5pc3RyYXRvciwgRGV2ZWxvcGVyIiwianRpIjoiMTlFNDIwRjk2OEYyNERFNDgwNzkyMTFGQzIwMDkyNjgifQ.qwbIaeaLNQcdO52A3KaF-Y2XXPjFMSnxDpdMI9MeEw6QGuaj7axgTnpxqGd-6tSr40cc08qM8M220FjthPIJRA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"messageId\": \"a1374655-5eb8-4a0e-9eb5-989521cd1ca8\",\r\n\t\"timestamp\": \"20200925183412\",\r\n\t\"senderId\": \"PSW\",\r\n\t\"receiverId\": \"MIB\",\r\n\t\"processingCode\": \"302\",\r\n\t\"data\": {\r\n\t\t\"iban\": \"PK67MCIB0471000001380003\"\r\n\t},\r\n\t\"signature\": \"OlPS7Bzbf/uVUeQ09cLXw0Q/S/nuSHrL9o+4ajoY048=\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/dealers/mcib/edi/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"dealers",
+						"mcib",
+						"edi",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

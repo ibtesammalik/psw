@@ -1,0 +1,12 @@
+FETCH AUTHENTICATION TOKEN
+	Url- localhost:8102/auth/connect/token
+	Note - The username and password must be sent in the request to validate the login credentials.
+	Request body-
+		{
+   				 "client_id": "psw.mib.spa",
+   				 "client_secret": "1R27XY78Y34"
+		}
+		
+WELCOME USER (PROTECTED URL)
+	Url - http://localhost:8102/auth/connect/introspect
+	Note- This request must contain bearer token in the header.
